@@ -1,29 +1,28 @@
 #include <iostream>
-#include "arreglo.cpp"
+#include "arreglo.h"
 void modificar(int *);
 int main(int argc, char const *argv[])
 {
-  ArregloDinamico arreglo;
-  arreglo.agregarFinal("Arreglo 2");
-  arreglo.agregarFinal("Arreglo 3");
-  arreglo.agregarFinal("Arreglo 4");
-  arreglo.agregarFinal("Arreglo 5");
-  arreglo.agregarFinal("Arreglo 6");
-  arreglo.agregarFinal("Arreglo 7");
-  arreglo.agregarFinal("Arreglo 8");
-  arreglo.agregarFinal("Arreglo 9");
-    
-  for (int i = 0; i < arreglo.size(); i++)
-  {
-      std::cout << arreglo[i] << std::endl;
-  }
-  std::cout << std::endl;
-  arreglo.agregarInicio("Arreglo 1");
-  arreglo.agregarInicio("Arreglo 0");
+  ArregloDinamico<std::string> arreglo;
+  arreglo.agregarFinal("TEXTO 1");
+  arreglo.agregarFinal("TEXTO 2");
+  arreglo.agregarFinal("TEXTO 3");
+  arreglo.agregarFinal("TEXTO 4");
+  arreglo.agregarInicio("TEXTO 5");
+  arreglo.agregarInicio("TEXTO 6");
+  arreglo.agregarInicio("TEXTO 7");
+  arreglo.agregarInicio("TEXTO 8");
+  
+  arreglo.mostrar();
 
-   for (int i = 0; i < arreglo.size(); i++)
-  {
-      std::cout << arreglo[i] << std::endl;
-  }
+  arreglo.insertar("Texto reemplazado", 2);
   std::cout << std::endl;
+  arreglo.mostrar();
+ 
+ arreglo.eliminarInicio(); 
+ arreglo.eliminarFinal(); 
+ arreglo.eliminar(1);
+ std::cout << std::endl;
+  arreglo.mostrar();
+
 }
