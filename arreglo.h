@@ -14,17 +14,29 @@ class ArregloDinamico{
     public:
     ArregloDinamico();
     ~ArregloDinamico();
+
     void agregarInicio(const T& v);
     void insertar(const T& v, size_t p);
     void agregarFinal(const T& v);
+
     void eliminarFinal();
     void eliminarInicio();
     void eliminar(size_t p);
+
+    T* buscar(const T& v);
+    ArregloDinamico<T*> buscar_todos(const T& v);
     void mostrar();
+
     size_t size();
     T operator[](size_t p){
         return arreglo[p];
     }
+
+    friend ArregloDinamico<T>& operator<<(ArregloDinamico<T> &a, const T& v){
+        a.agregarFinal(v);
+        return a;
+    } 
+
     private:
     void expandir();
     };
@@ -100,7 +112,7 @@ class ArregloDinamico{
     template<class T>
     void ArregloDinamico<T>::eliminarFinal(){
         if(ultimi == 0){
-            std::cout << "Arreglo vacio" ;
+            std::cout << "Arreglo vacio" << std::endl;
             return;
         }
         ultimi--;
@@ -109,7 +121,7 @@ class ArregloDinamico{
     template<class T>
     void ArregloDinamico<T>::eliminarInicio(){
         if(ultimi == 0){
-            std::cout << "Arreglo vacio" ;
+            std::cout << "Arreglo vacio" << std::endl;
             return;
         }
         for (size_t i = 0; i < ultimi-1; i++)
@@ -121,7 +133,7 @@ class ArregloDinamico{
     template<class T>
     void ArregloDinamico<T>::eliminar(size_t p){
         if(ultimi == 0){
-            std::cout << "Arreglo vacio" ;
+            std::cout << "Arreglo vacio" << std::endl;
             return;
         }
         for (size_t i = p; i < ultimi-1; i++)
@@ -134,6 +146,28 @@ class ArregloDinamico{
     template<class T>
     size_t ArregloDinamico<T>::size(){
         return ultimi;
+    }
+
+    template<class T>
+    T* ArregloDinamico<T>::buscar(const T& v){
+        for(size_t i = 0; i < ultimi; i++){
+            if(v == arreglo[i]){
+                return &arreglo[i];
+            }
+        }
+        
+        return nullptr;
+    }
+
+    template<class T>
+    ArregloDinamico<T*> ArregloDinamico<T>::buscar_todos(const T& v){
+        ArregloDinamico<T*> ptrs;
+        for(size_t i = 0; i < ultimi; i++){
+            if(v == arreglo[i]){
+                ptrs.agregarFinal(&arreglo[i]);
+            }
+        }
+        return ptrs;
     }
 
     template<class T>
